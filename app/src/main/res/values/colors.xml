@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#24BD64</color>
+    <color name="colorPrimaryDark">#24BD64</color>
+    <color name="colorAccent">#24BD64</color>
+    <color name="bottomIcon">#D5D5D5</color>
+    <color name="colorEx">#3CECB3</color>
+    <color name="cardBackground">#EFEEF3</color>
+    <color name="redFab">#FF0000</color>
+    <color name="greyCard">#DFDEE3</color>
+
+
+
+</resources>

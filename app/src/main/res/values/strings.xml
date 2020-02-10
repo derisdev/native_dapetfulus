@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dapet Fulus</string>
+    <string name="task">Misi</string>
+    <string name="moretask">Lebih Banyak</string>
+    <string name="payouts">Penukaran</string>
+    <string name="invite">Undang</string>
+</resources>

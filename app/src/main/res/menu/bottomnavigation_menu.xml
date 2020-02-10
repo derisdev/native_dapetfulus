@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/home_menu"
+        android:title="@string/task"
+        android:icon="@drawable/ic_event_note"/>
+
+    <item
+        android:id="@+id/search_menu"
+        android:title="@string/moretask"
+        android:icon="@drawable/ic_monetization_on"/>
+
+    <item
+        android:id="@+id/favorite_menu"
+        android:title="@string/payouts"
+        android:icon="@drawable/ic_card_giftcard"/>
+    <item
+        android:id="@+id/account_menu"
+        android:title="@string/invite"
+        android:icon="@drawable/ic_person_add"/>
+
+</menu>

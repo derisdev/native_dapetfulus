@@ -16,13 +16,17 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bn_main"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         app:itemIconSize="35dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
         app:itemIconTint="@drawable/state_bnve"
         app:itemTextColor="@drawable/state_bnve"
-        app:menu="@menu/bottomnavigation_menu" />
+        app:menu="@menu/bottomnavigation_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        />
 
 
 </RelativeLayout>

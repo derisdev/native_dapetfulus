@@ -1,10 +1,12 @@
 package id.deris.dapetfulus;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,6 +46,16 @@ public class PayoutsFragment extends Fragment {
         tabPayouts2text = view.findViewById(R.id.tabPayouts2Text);
         withdrawLayout = view.findViewById(R.id.withdraw_layout);
         withdrawHistoryLayout = view.findViewById(R.id.withdraw_history_layout);
+
+        ImageButton menuBtn = view.findViewById(R.id.btn_menu);
+
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         rvWithdraw = view.findViewById(R.id.rv_withdraw);
@@ -85,8 +97,8 @@ public class PayoutsFragment extends Fragment {
 
     private void showRecyclerList(){
         rvWithdraw.setLayoutManager(new LinearLayoutManager(getContext()));
-        WithdrawAdapter listHeroAdapter = new WithdrawAdapter(listData);
-        rvWithdraw.setAdapter(listHeroAdapter);
+        WithdrawAdapter listAdapter = new WithdrawAdapter(listData);
+        rvWithdraw.setAdapter(listAdapter);
     }
 
 }

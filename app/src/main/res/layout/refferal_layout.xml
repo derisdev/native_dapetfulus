@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/link_layout"
+    android:id="@+id/refferal_layout"
     android:layout_marginTop="50dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"

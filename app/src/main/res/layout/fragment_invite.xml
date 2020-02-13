@@ -33,6 +33,7 @@
 
 
     <ImageButton
+        android:id="@+id/btn_menu"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:scaleType="fitXY"
@@ -72,7 +73,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/tabPayouts1"
+        android:id="@+id/tabInvite1"
         android:layout_width="150dp"
         android:layout_height="75dp"
         app:cardCornerRadius="20dp"
@@ -85,7 +86,7 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/tabPayouts1Text"
+            android:id="@+id/tabInvite1Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -96,7 +97,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/tabPayouts2"
+        android:id="@+id/tabInvite2"
         android:layout_width="150dp"
         android:layout_height="75dp"
         app:cardCornerRadius="20dp"
@@ -110,7 +111,7 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/tabPayouts2Text"
+            android:id="@+id/tabInvite2Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -1,5 +1,6 @@
 package id.deris.dapetfulus;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,8 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,26 @@ public class TaskFragment extends Fragment {
         ImageView banner1 = view.findViewById(R.id.banner1);
         ImageView banner2 = view.findViewById(R.id.banner2);
         TextView scroller = view.findViewById(R.id.scroller);
+        LinearLayout marqueeText = view.findViewById(R.id.marquee_text);
+
+        marqueeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), NotifActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton menuBtn = view.findViewById(R.id.btn_menu);
+
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         scroller.setSelected(true);
 
@@ -49,14 +71,16 @@ public class TaskFragment extends Fragment {
         banner2.setImageDrawable(dr2);
 
 
-        getActivity().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT );
-
+        fullscreen();
         return view;
     }
 
+        private void fullscreen() {
+             getActivity().getWindow().getDecorView().setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+             getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT );
 
+}
 
 }

@@ -22,11 +22,19 @@
 
 
         <include layout="@layout/withdraw_layout"
-                />
+            />
 
             <include layout="@layout/withdraw_history_layout"
                 android:visibility="gone"
                 />
+
+            <include layout="@layout/loading_layout"
+                android:visibility="gone"
+                />
+
+        <include layout="@layout/data_empty_layout"
+            android:visibility="gone"
+            />
 
 
     </LinearLayout>

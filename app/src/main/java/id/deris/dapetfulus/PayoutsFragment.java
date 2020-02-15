@@ -3,6 +3,8 @@ package id.deris.dapetfulus;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class PayoutsFragment extends Fragment {
 
@@ -27,6 +32,8 @@ public class PayoutsFragment extends Fragment {
     private TextView tabPayouts1text, tabPayouts2text;
     private NestedScrollView withdrawLayout;
     private RelativeLayout withdrawHistoryLayout;
+    private SpinKitView spinKitView;
+    private TextView dataEmpty;
 
 
 
@@ -46,6 +53,8 @@ public class PayoutsFragment extends Fragment {
         tabPayouts2text = view.findViewById(R.id.tabPayouts2Text);
         withdrawLayout = view.findViewById(R.id.withdraw_layout);
         withdrawHistoryLayout = view.findViewById(R.id.withdraw_history_layout);
+        spinKitView = view.findViewById(R.id.spinkit_layout);
+        dataEmpty = view.findViewById(R.id.data_empty_tv);
 
         ImageButton menuBtn = view.findViewById(R.id.btn_menu);
 
@@ -61,8 +70,7 @@ public class PayoutsFragment extends Fragment {
         rvWithdraw = view.findViewById(R.id.rv_withdraw);
         rvWithdraw.setHasFixedSize(true);
 
-        listData.addAll(InputWithdrawSementara.getListData());
-        showRecyclerList();
+
 
 
 
@@ -75,18 +83,49 @@ public class PayoutsFragment extends Fragment {
                 tabPayouts2text.setTextColor(Color.BLACK);
                 withdrawLayout.setVisibility(View.VISIBLE);
                 withdrawHistoryLayout.setVisibility(View.GONE);
+                dataEmpty.setVisibility(View.GONE);
             }
         });
 
         tabPayouts2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 tabPayouts2.setCardBackgroundColor(Color.WHITE);
                 tabPayouts1.setCardBackgroundColor(getResources().getColor(R.color.tabTransparent));
                 tabPayouts2text.setTextColor(getResources().getColor(R.color.amber));
                 tabPayouts1text.setTextColor(Color.BLACK);
-                withdrawHistoryLayout.setVisibility(View.VISIBLE);
+
                 withdrawLayout.setVisibility(View.GONE);
+
+                spinKitView.setVisibility(View.VISIBLE);
+                ReadPayment readPayment = new ReadPayment(getContext());
+                readPayment.execute();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DBHelper dbHelper = DBHelper.getInstance(getContext());
+                        List<WithdrawModel> payments = dbHelper.getAllPayment();
+                        Log.d("data payment", payments.toString());
+                        listData.addAll(payments);
+                        showRecyclerList();
+                        spinKitView.setVisibility(View.GONE);
+                        if (payments.isEmpty()){
+                            dataEmpty.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            withdrawHistoryLayout.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, 5000);
+
+
+
+
+
             }
         });
 

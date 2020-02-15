@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1020768638219",
+    "firebase_url": "https://dapet-fulus.firebaseio.com",
+    "project_id": "dapet-fulus",
+    "storage_bucket": "dapet-fulus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020768638219:android:224fdb73e710f6cc797e0e",
+        "android_client_info": {
+          "package_name": "id.deris.dapetfulus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020768638219-lqmthbnf3mggcf7hljp2vg7o8f7cpm8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.deris.dapetfulus",
+            "certificate_hash": "5ded5b50405b1fb464d1d9b1daa091e2029845c5"
+          }
+        },
+        {
+          "client_id": "1020768638219-f8rvt6kjgrhni0vddbgb90e08hecihh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv0vIcoOtl-1WBdeE2VLOMI2-3kR-HPsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020768638219-f8rvt6kjgrhni0vddbgb90e08hecihh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

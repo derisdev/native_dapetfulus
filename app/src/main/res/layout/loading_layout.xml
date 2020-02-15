@@ -1,0 +1,11 @@
+<com.github.ybq.android.spinkit.SpinKitView style="@style/SpinKitView.ThreeBounce"
+    android:id="@+id/spinkit_layout"
+    android:layout_marginTop="150dp"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_gravity="center"
+    app:SpinKit_Color="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+
+

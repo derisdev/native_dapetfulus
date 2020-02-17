@@ -26,6 +26,13 @@ public class SplashActivity extends AppCompatActivity {
 
         final boolean login = Prefs.getBoolean("login", false);
 
+        ReadPayment readPayment = new ReadPayment(getApplicationContext());
+        readPayment.execute();
+        ReadNotif readNotif = new ReadNotif(getApplicationContext());
+        readNotif.execute();
+        ReadRewards readRewards = new ReadRewards(getApplicationContext());
+        readRewards.execute();
+
 
         Thread timer=new Thread()
         {

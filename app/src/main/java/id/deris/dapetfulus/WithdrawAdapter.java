@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListViewHolder>{
 
@@ -63,5 +64,16 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListVi
             time = itemView.findViewById(R.id.time_withdraw);
             status = itemView.findViewById(R.id.status_withdraw);
         }
+    }
+
+    public void clear() {
+        listWithdraw.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<WithdrawModel> list) {
+        listWithdraw.addAll(list);
+        notifyDataSetChanged();
     }
 }

@@ -60,17 +60,45 @@
             />
 
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:layout_gravity="center"
-            android:textSize="30sp"
-            android:textColor="@android:color/white"
-            />
+            <TextView
+                android:id="@+id/tv_invited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spinkit_invited"
+                style="@style/SpinKitView.ThreeBounce"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@android:color/white"
+                android:visibility="gone"/>
+
+        </FrameLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_refresh"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/ic_refresh"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="50sp"
+        android:layout_gravity="end"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tabInvite1"

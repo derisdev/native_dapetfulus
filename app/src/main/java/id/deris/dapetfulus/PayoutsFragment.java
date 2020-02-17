@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
@@ -33,7 +35,8 @@ public class PayoutsFragment extends Fragment {
     private NestedScrollView withdrawLayout;
     private RelativeLayout withdrawHistoryLayout;
     private SpinKitView spinKitView;
-    private TextView dataEmpty;
+    private LinearLayout dataEmpty;
+    private SwipeRefreshLayout swipeContainer, swipeContainerEmpty;
 
 
 
@@ -54,7 +57,9 @@ public class PayoutsFragment extends Fragment {
         withdrawLayout = view.findViewById(R.id.withdraw_layout);
         withdrawHistoryLayout = view.findViewById(R.id.withdraw_history_layout);
         spinKitView = view.findViewById(R.id.spinkit_layout);
-        dataEmpty = view.findViewById(R.id.data_empty_tv);
+        dataEmpty = view.findViewById(R.id.data_empty_layout);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainerEmpty = view.findViewById(R.id.swipeContainer_empty);
 
         ImageButton menuBtn = view.findViewById(R.id.btn_menu);
 
@@ -70,6 +75,11 @@ public class PayoutsFragment extends Fragment {
         rvWithdraw = view.findViewById(R.id.rv_withdraw);
         rvWithdraw.setHasFixedSize(true);
 
+        DBHelper dbHelper = DBHelper.getInstance(getContext());
+        List<WithdrawModel> payments = dbHelper.getAllPayment();
+        listData.addAll(payments);
+        showRecyclerList();
+
 
 
 
@@ -84,6 +94,7 @@ public class PayoutsFragment extends Fragment {
                 withdrawLayout.setVisibility(View.VISIBLE);
                 withdrawHistoryLayout.setVisibility(View.GONE);
                 dataEmpty.setVisibility(View.GONE);
+                spinKitView.setVisibility(View.GONE);
             }
         });
 
@@ -96,10 +107,34 @@ public class PayoutsFragment extends Fragment {
                 tabPayouts1.setCardBackgroundColor(getResources().getColor(R.color.tabTransparent));
                 tabPayouts2text.setTextColor(getResources().getColor(R.color.amber));
                 tabPayouts1text.setTextColor(Color.BLACK);
-
                 withdrawLayout.setVisibility(View.GONE);
-
                 spinKitView.setVisibility(View.VISIBLE);
+
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DBHelper dbHelper = DBHelper.getInstance(getContext());
+                        List<WithdrawModel> payments = dbHelper.getAllPayment();
+                        if (payments.isEmpty()){
+                            dataEmpty.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            withdrawHistoryLayout.setVisibility(View.VISIBLE);
+                        }
+                        spinKitView.setVisibility(View.GONE);
+
+                    }
+                }, 1000);
+
+
+            }
+        });
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
                 ReadPayment readPayment = new ReadPayment(getContext());
                 readPayment.execute();
 
@@ -109,25 +144,59 @@ public class PayoutsFragment extends Fragment {
                     public void run() {
                         DBHelper dbHelper = DBHelper.getInstance(getContext());
                         List<WithdrawModel> payments = dbHelper.getAllPayment();
-                        Log.d("data payment", payments.toString());
                         listData.addAll(payments);
-                        showRecyclerList();
-                        spinKitView.setVisibility(View.GONE);
+                       WithdrawAdapter adapter = new WithdrawAdapter(listData);
+                       adapter.clear();
+                       adapter.addAll(listData);
                         if (payments.isEmpty()){
                             dataEmpty.setVisibility(View.VISIBLE);
                         }
                         else {
                             withdrawHistoryLayout.setVisibility(View.VISIBLE);
                         }
+                        swipeContainer.setRefreshing(false);
                     }
                 }, 5000);
-
-
-
-
-
             }
         });
+
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        swipeContainerEmpty.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ReadPayment readPayment = new ReadPayment(getContext());
+                readPayment.execute();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DBHelper dbHelper = DBHelper.getInstance(getContext());
+                        List<WithdrawModel> payments = dbHelper.getAllPayment();
+                        listData.addAll(payments);
+                        WithdrawAdapter adapter = new WithdrawAdapter(listData);
+                        adapter.clear();
+                        adapter.addAll(listData);
+                        if (payments.isEmpty()){
+                            dataEmpty.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            withdrawHistoryLayout.setVisibility(View.VISIBLE);
+                        }
+                        swipeContainerEmpty.setRefreshing(false);
+                    }
+                }, 5000);
+            }
+        });
+        swipeContainerEmpty.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
 
 

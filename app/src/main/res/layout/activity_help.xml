@@ -64,6 +64,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/help_whatsapp"
                 android:layout_width="160dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -111,6 +112,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/help_mail"
                 android:layout_width="160dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

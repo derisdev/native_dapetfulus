@@ -80,6 +80,17 @@
                                 android:clickable="true"
                                 android:focusable="true"/>
 
+                            <TextView
+                                android:id="@+id/phone_number_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:text="6285719632945"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp"
+                                android:visibility="gone"
+                                />
+
 
 
                         </LinearLayout>

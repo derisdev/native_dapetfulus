@@ -132,6 +132,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textIsSelectable="true"
+                        android:longClickable="true"
                         android:text="@string/bre21w"
                         android:textSize="30dp"
                         android:textColor="@android:color/holo_blue_light"

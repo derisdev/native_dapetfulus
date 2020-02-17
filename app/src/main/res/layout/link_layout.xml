@@ -131,6 +131,8 @@
                         android:id="@+id/link_refferal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textIsSelectable="true"
+                        android:longClickable="true"
                         android:layout_gravity="center"
                         android:text="@string/link"
                         android:textColor="@android:color/holo_blue_light"

@@ -1,13 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
-<TextView
-    android:id="@+id/data_empty_tv"
-    android:layout_marginTop="250dp"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:textAlignment="center"
-    android:text="Belum ada data\nTarik kebawah untuk memperbarui"
-    android:textColor="@android:color/black"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/data_empty_layout"
+    >
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeContainer_empty"
+
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <TextView
+                android:text="Belum ada data\ntarik kebawah untuk memperbarui"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

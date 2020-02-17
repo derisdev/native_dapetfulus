@@ -18,6 +18,7 @@ public class MenuActivity extends AppCompatActivity {
     ImageView backButton;
     TextView username ,phoneVerifyBtn;
     LinearLayout qaMenu, notifMenu, helpMenu;
+    TextView phoneNumberTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class MenuActivity extends AppCompatActivity {
         qaMenu = findViewById(R.id.qa_menu);
         notifMenu = findViewById(R.id.notif_menu);
         helpMenu = findViewById(R.id.help_menu);
+        phoneNumberTv = findViewById(R.id.phone_number_tv);
+
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +52,14 @@ public class MenuActivity extends AppCompatActivity {
 
         String name = Prefs.getString("name", "Data tidak ada");
         username.setText(name);
+
+        String phoneNumber = Prefs.getString("phone", null);
+        if(phoneNumber!=null) {
+            phoneNumberTv.setText(phoneNumber);
+            phoneNumberTv.setVisibility(View.VISIBLE);
+            phoneVerifyBtn.setVisibility(View.GONE);
+        }
+
 
         phoneVerifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,4 +106,12 @@ public class MenuActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
 }

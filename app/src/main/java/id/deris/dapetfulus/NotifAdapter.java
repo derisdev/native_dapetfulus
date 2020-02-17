@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ListViewHolder> {
 
@@ -47,4 +48,15 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ListViewHold
             time =itemView.findViewById(R.id.time_notif);
         }
     }
+    public void clear() {
+        listNotif.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<NotifModel> list) {
+        listNotif.addAll(list);
+        notifyDataSetChanged();
+    }
+
 }

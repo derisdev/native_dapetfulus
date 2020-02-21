@@ -3,20 +3,37 @@ package id.deris.dapetfulus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.app.FragmentTransaction;
 import android.content.ContextWrapper;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jaeger.library.StatusBarUtil;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.pollfish.classes.SurveyInfo;
+import com.pollfish.interfaces.PollfishCompletedSurveyListener;
+import com.pollfish.interfaces.PollfishSurveyNotAvailableListener;
+import com.pollfish.interfaces.PollfishUserNotEligibleListener;
+import com.pollfish.interfaces.PollfishUserRejectedSurveyListener;
+import com.tapjoy.TJConnectListener;
+import com.tapjoy.TJEarnedCurrencyListener;
+import com.tapjoy.Tapjoy;
+import com.tapjoy.TapjoyConnectFlag;
+
+import java.util.Hashtable;
+import com.pollfish.main.PollFish;
+import com.pollfish.main.PollFish.ParamsBuilder;
+import com.pollfish.constants.Position;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.DateTime;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -26,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        JodaTimeAndroid.init(this);
+
+        DateTime now = DateTime.now();
+        Log.d("timee", now.toString());
 
 
         new Prefs.Builder()
@@ -41,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
+
+
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -91,4 +118,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         }, 2000);
     }
+
+
 }

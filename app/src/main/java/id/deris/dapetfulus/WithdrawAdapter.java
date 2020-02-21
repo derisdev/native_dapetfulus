@@ -1,5 +1,8 @@
 package id.deris.dapetfulus;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,7 +19,9 @@ import java.util.List;
 public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListViewHolder>{
 
     private ArrayList<WithdrawModel> listWithdraw;
-    public WithdrawAdapter(ArrayList<WithdrawModel> list) {
+    private Context context;
+    public WithdrawAdapter(Context context, ArrayList<WithdrawModel> list) {
+        this.context = context;
         this.listWithdraw = list;
     }
 
@@ -29,7 +35,7 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListVi
 
     @Override
     public void onBindViewHolder(@NonNull WithdrawAdapter.ListViewHolder holder, int position) {
-        WithdrawModel withdraw = listWithdraw.get(position);
+        final WithdrawModel withdraw = listWithdraw.get(position);
         holder.amount.setText(withdraw.getAmount());
         holder.time.setText(withdraw.getTime());
         holder.status.setText(withdraw.getStatus());
@@ -45,6 +51,22 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListVi
         else {
             holder.icon.setImageResource(R.drawable.gopay);
         }
+
+        holder.detailWithdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("newDatee", withdraw.getTime());
+
+
+                Intent intent = new Intent(context, DetailWithdrawHistoryActivity.class);
+                intent.putExtra("date", withdraw.getTime());
+                intent.putExtra("status", withdraw.getStatus());
+                intent.putExtra("via", withdraw.getVia());
+                intent.putExtra("amount", withdraw.getAmount());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,6 +78,7 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListVi
 
         TextView amount, time, status;
         ImageView icon;
+        CardView detailWithdraw;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +86,7 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.ListVi
             amount = itemView.findViewById(R.id.amount_withdraw);
             time = itemView.findViewById(R.id.time_withdraw);
             status = itemView.findViewById(R.id.status_withdraw);
+            detailWithdraw = itemView.findViewById(R.id.detail_withdraw);
         }
     }
 

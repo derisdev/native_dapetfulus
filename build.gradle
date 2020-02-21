@@ -20,6 +20,15 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven {
+            name "Fyber's maven repo"
+            url "https://fyber.bintray.com/maven"
+        }
+
+        maven {
+            name "Tapjoy's maven repo"
+            url "https://tapjoy.bintray.com/maven"
+        }
         
     }
 }

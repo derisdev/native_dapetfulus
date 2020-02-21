@@ -178,7 +178,9 @@ public class RegisterAcitivity extends AppCompatActivity {
                 if (response.code()==201) {
 
                     Prefs.putBoolean("login", true);
-                    Prefs.putString("refferal_code_refferer", refferal.getText().toString());
+                    if(!refferal.getText().toString().isEmpty()) {
+                        Prefs.putString("refferal_code_refferer", refferal.getText().toString());
+                    }
 
                     if (!refferal.getText().toString().equals("")) {
                         Prefs.putBoolean("haveRefferal", true);

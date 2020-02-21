@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -52,6 +53,14 @@ public class InviteFragment extends Fragment {
         ImageButton refresh = view.findViewById(R.id.btn_refresh);
         final TextView invited = view.findViewById(R.id.tv_invited);
         final SpinKitView spinKit =  view.findViewById(R.id.spinkit_invited);
+        final CardView whatsappShare = view.findViewById(R.id.whatsapp_share);
+        final CardView otherShare = view.findViewById(R.id.other_share);
+        final CardView whatsappShare2 = view.findViewById(R.id.whatsapp_share2);
+        final CardView otherShare2 = view.findViewById(R.id.other_share2);
+
+        final String refferalCodeOwners = Prefs.getString("refferal_code_owner", "belum ada data");
+        final String linkRefferals = Prefs.getString("link_refferal", "belum ada data");
+
 
         final String currentInvited = Prefs.getString("invited", "0");
         invited.setText(currentInvited);
@@ -108,11 +117,24 @@ public class InviteFragment extends Fragment {
                 tabInvite1text.setTextColor(Color.BLACK);
                 refferalLayout.setVisibility(View.VISIBLE);
                 linkLayout.setVisibility(View.GONE);
+
+                whatsappShare2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sharetoWhatsapp(null, refferalCodeOwners);
+                    }
+                });
+
+                otherShare2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sharetoOther(null, refferalCodeOwners);
+                    }
+                });
             }
         });
 
-        String refferalCodeOwners = Prefs.getString("refferal_code_owner", "belum ada data");
-        String linkRefferals = Prefs.getString("link_refferal", "belum ada data");
+
 
         SpannableString content = new SpannableString(refferalCodeOwners);
         content.setSpan(new UnderlineSpan(), 0, refferalCodeOwners.length(), 0);
@@ -148,7 +170,51 @@ public class InviteFragment extends Fragment {
             }
         });
 
+        whatsappShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               sharetoWhatsapp(linkRefferals, null);
+            }
+        });
+
+        otherShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               sharetoOther(linkRefferals, null);
+            }
+        });
+
         return view;
+    }
+
+    private void sharetoWhatsapp(String linkRefferals, String refferalCodeOwners) {
+
+        Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+        whatsappIntent.setType("text/plain");
+        whatsappIntent.setPackage("com.whatsapp");
+        if (refferalCodeOwners == null) {
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Ayo bergabung bersama saya di Aplikasi Dapet Fulus dan dapatkan penghasilan lebih.\n\nGunakan Link "+ linkRefferals);
+        }
+        else {
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Ayo bergabung bersama saya di Aplikasi Dapet Fulus dan dapatkan penghasilan lebih.\n\nGunakan kode Refferal "+refferalCodeOwners);
+        }
+        try {
+            Objects.requireNonNull(getActivity()).startActivity(whatsappIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.whatsapp")));
+        }
+    }
+
+    private void sharetoOther(String linkRefferals, String refferalCodeOwners) {
+        Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+        txtIntent .setType("text/plain");
+        if (refferalCodeOwners == null) {
+            txtIntent.putExtra(Intent.EXTRA_TEXT, "Ayo bergabung bersama saya di Aplikasi Dapet Fulus dan dapatkan penghasilan lebih.\n\nGunakan Link "+ linkRefferals);
+        }
+        else {
+            txtIntent.putExtra(Intent.EXTRA_TEXT, "Ayo bergabung bersama saya di Aplikasi Dapet Fulus dan dapatkan penghasilan lebih.\n\nGunakan kode Refferal "+refferalCodeOwners);
+        }
+        startActivity(Intent.createChooser(txtIntent ,"Share"));
     }
 
 }

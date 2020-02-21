@@ -36,4 +36,11 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.pixplicity.easyprefs:library:1.9.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.fyber:fyber-sdk:9.0.0'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    api 'com.tapjoy:tapjoy-android-sdk:12.4.2@aar'
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.1.0'
+    implementation 'com.pollfish:pollfish:5.3.0:googleplayRelease@aar'
+    implementation 'net.danlew:android.joda:2.10.3'
 }

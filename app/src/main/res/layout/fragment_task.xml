@@ -19,6 +19,7 @@
         android:scaleType="fitXY" />
 
     <LinearLayout
+        android:id="@+id/history_activity_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -35,6 +36,7 @@
             android:src="@drawable/coin"/>
 
         <TextView
+            android:id="@+id/current_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2000"
@@ -116,6 +118,7 @@
                     android:paddingBottom="150dp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/offerwall1"
                         android:layout_width="match_parent"
                         android:layout_height="225dp"
                         project:cardCornerRadius="30dp"

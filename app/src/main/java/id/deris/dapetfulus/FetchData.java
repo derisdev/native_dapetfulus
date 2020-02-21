@@ -186,6 +186,58 @@ class CreateRewards extends AsyncTask<String, String, Void> {
     }
 }
 
+class UpdateRewards extends AsyncTask<String, String, Void> {
+
+
+
+    @Override
+    protected Void doInBackground(String... strings) {
+
+        String refferalCodeRefferer = Prefs.getString("refferal_code_refferer", "norefferer");
+
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("rewards", strings[0]);
+            jsonObject.put("from", strings[1]);
+            jsonObject.put("refferal", refferalCodeRefferer);
+            jsonObject.put("_method", "PATCH");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        RequestBody body = RequestBody.create(jsonObject.toString(), JSON);
+
+        String rewardsId = Prefs.getString("rewards_id", null);
+        String token = Prefs.getString("token", null);
+
+        String url = "https://dapetfulus.000webhostapp.com/api/v1/rewards/"+rewardsId+"?token="+token;
+
+        OkHttpClient client = new OkHttpClient();
+
+
+        final Request request = new Request.Builder().header("Accept", "application/json")
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+                if (response.code()==200) {
+                    Log.d("Response data rewards", String.valueOf(response));
+                }
+            }
+        });
+        return null;
+    }
+}
 
 class ReadRewards extends AsyncTask<String, String, Void> {
 

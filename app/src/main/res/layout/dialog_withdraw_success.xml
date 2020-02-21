@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="550dp"
+    android:layout_gravity="center"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:gravity="center">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="40dp"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fabSize="auto"
+                app:fabCustomSize="140dp"
+                android:src="@drawable/ic_check"
+                android:layout_gravity="center"
+                app:elevation="0dp"
+                android:elevation="0dp"
+                android:backgroundTint="@color/colorPrimary"
+                app:maxImageSize="100dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Penukaran Berhasil"
+                android:layout_margin="10dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Kami akan melakukan pembayaran Maksimal 3 hari jam kerja."/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back_btn_dialog_withdraw_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="auto"
+        app:fabCustomSize="40dp"
+        android:src="@drawable/ic_close_black_24dp"
+        android:backgroundTint="@color/amber"
+        android:layout_gravity="bottom|center"
+        app:borderWidth="0dp"
+        />
+
+</FrameLayout>
